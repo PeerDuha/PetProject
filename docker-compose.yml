@@ -1,0 +1,11 @@
+version "3.9"
+
+sevices:
+  nginx:
+    image: nginx
+    container_name: crypto-nginx
+    ports:
+      - "8080:80
+    volumes:
+      - ./nginx-data:/usr/share/nginx/html
+    restart:  unless-stopped

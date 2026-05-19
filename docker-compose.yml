@@ -1,11 +1,20 @@
-version "3.9"
+version: "3.9"
 
-sevices:
+services:
   nginx:
-    image: nginx
+    image: nginx:alpine
     container_name: crypto-nginx
+
     ports:
-      - "8080:80
+      - "${PORT}:80"
+
     volumes:
       - ./nginx-data:/usr/share/nginx/html
-    restart:  unless-stopped
+
+    restart: unless-stopped
+
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
